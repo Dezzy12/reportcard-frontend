@@ -38,6 +38,12 @@ export class AdminDashboardComponent implements OnInit {
         routerLinkActiveOptions: {exact: true},
       },
       {
+        label: 'Admins',
+        icon: 'pi pi-fw pi-user',
+        routerLink: ['/admin/admins'],
+        routerLinkActiveOptions: {exact: true},
+      },
+      {
         label: 'Teachers',
         icon: 'pi pi-fw pi-user',
         routerLink: ['/admin/teachers'],
