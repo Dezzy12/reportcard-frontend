@@ -7,7 +7,7 @@ import {
   HttpRequest,
   HttpResponse
 } from '@angular/common/http';
-import {catchError, Observable, of, tap} from 'rxjs';
+import {catchError, EMPTY, Observable, of, tap} from 'rxjs';
 import {Message, MessageService} from "primeng/api";
 import {LocalStorageUtil} from "../utils/local-storage.util";
 import {Router} from "@angular/router";
@@ -53,24 +53,26 @@ export class HttpResponseInterceptor implements HttpInterceptor {
 
   private errorResponseHandler = (response: HttpErrorResponse) => {
     console.log(response)
-    const error = response.error;
-    const message: Message = {
-      severity: 'error',
-      summary: 'Error',
-      detail: 'Something unexpected happened. Please file a report to the developers!'
-    };
-    if (error) {
-      message.detail = error.message ? error.message : message.detail;
-    } else {
-      message.detail = 'Something unexpected happened. Please file a report to the developers!'
+    if (response) {
+      if (response.error) {
+        const error = response.error;
+        const message: Message = {
+          severity: 'error', summary: 'Error',
+          detail: 'Something unexpected happened. Please file a report to the developers!'
+        };
+        if (error) {
+          if (error.message) {
+            message.detail = error.message
+            if (response.status == 401) {
+              message.detail = error.message ? error.message : 'You are not logged in!';
+              this.router.navigate(['/auth/login']).then(() => LocalStorageUtil.deleteUserToken());
+            }
+          }
+        }
+        this.msgService.add(message);
+        return of(error);
+      }
     }
-
-
-    if (response.status == 401) {
-      message.detail = error.message ? error.message : 'You are not logged in!';
-      this.router.navigate(['/auth/login']).then(() => LocalStorageUtil.deleteUserToken());
-    }
-    this.msgService.add(message);
-    return of(error);
+    return EMPTY;
   }
 }
