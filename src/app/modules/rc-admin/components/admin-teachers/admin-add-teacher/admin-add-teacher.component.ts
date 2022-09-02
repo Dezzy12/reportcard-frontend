@@ -15,41 +15,15 @@ import {School} from "../../../../../models/dto/school.model";
 })
 export class AdminAddTeacherComponent implements OnInit {
   schools: School[] = [];
-  registerForm: FormGroup;
+
 
   constructor(
-    private router: Router,
-    private fb: FormBuilder,
-    private authService: AuthService,
     private _schoolService: SchoolService,
   ) {
-    this.registerForm = this.fb.group({
-      firstName: ["", Validators.required], lastName: ["", Validators.required],
-      email: ["", Validators.required], school: [0, Validators.required],
-      password: ["", Validators.required], rpassword: ["", Validators.required],
-      phone: ["", Validators.required], address: [""],
-    });
+
   }
 
   ngOnInit(): void {
     this._schoolService.getAll().subscribe(schools => this.schools = schools);
-  }
-
-  registerAction() {
-    const password = this.registerForm.get("password")?.value;
-    const user: User = {
-      id: -1, role: Role.TEACHER, email: this.registerForm.get("email")?.value, username: '',
-      firstName: this.registerForm.get("firstName")?.value, lastName: this.registerForm.get("lastName")?.value,
-      phone: this.registerForm.get("phone")?.value, address: this.registerForm.get("address")?.value, approved: false
-    }
-    const teacher: Teacher = {
-      id: -1, user: user, schoolId: this.registerForm.get("school")?.value,
-    }
-
-    this.authService.registerTeacher(teacher, password).subscribe(() => this.router.navigate(['/admin/teachers']).then())
-  }
-
-  isFormValid() {
-    return this.registerForm.get('rpassword')?.value == this.registerForm.get('password')?.value && this.registerForm.valid;
   }
 }
