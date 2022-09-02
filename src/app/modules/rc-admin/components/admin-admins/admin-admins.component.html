@@ -1,0 +1,35 @@
+<div class="surface-section px-2 py-5">
+  <div class="shadow-2 border-round p-2 lg:p-4">
+    <p-toolbar styleClass="mb-4">
+      <ng-template pTemplate="left">
+        <p-dropdown  placeholder="Select By Assigned School"></p-dropdown>
+      </ng-template>
+      <ng-template pTemplate="right">
+        <p-button [routerLink]="['/admin/admins/add']" label="Add Admin"></p-button>
+      </ng-template>
+    </p-toolbar>
+    <p-divider></p-divider>
+    <p-table [value]="admins" responsiveLayout="scroll" styleClass="p-datatable-striped">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Username</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Address</th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template let-a pTemplate="body">
+        <tr>
+          <td>{{a.username}}</td>
+          <td>{{a.firstName + ' ' + a.lastName}}</td>
+          <td>{{a.phone}}</td>
+          <td>{{a.address}}</td>
+          <td>
+            <p-button [routerLink]="['/admin/admins/view', a.id]" label="View"></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
