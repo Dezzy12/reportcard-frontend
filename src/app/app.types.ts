@@ -30,7 +30,8 @@ export type RcClassLevel = {
 
 export type RcSubjectRegistered = {
   subject: Subject,
-  registration: SubjectRegistration
+  registration: SubjectRegistration,
+  complete: boolean
 }
 
 
