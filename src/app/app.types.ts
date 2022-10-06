@@ -17,7 +17,7 @@ export type SAT = {
 
 export type  StudentClassLevel = {
   id: number,
-  sub_id: number,
+  subId: number,
   name: string,
   classLevel: ClassLevel,
   classLevelSub: ClassLevelSub
