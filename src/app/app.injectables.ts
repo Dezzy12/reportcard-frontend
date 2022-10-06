@@ -14,7 +14,7 @@ import {
   RC_SEQUENCE_API_URL,
   RC_SETTINGS_API_URL,
   RC_STUDENT_API_URL,
-  RC_STUDENT_APPLICATION_API_URL,
+  RC_STUDENT_APPLICATION_API_URL, RC_STUDENT_CLASS_LEVEL_API_URL,
   RC_SUBJECT_API_URL,
   RC_SUBJECT_REGISTRATION_API_URL,
   RC_SUBJECT_TEACHER_API_URL,
@@ -40,6 +40,7 @@ import {AuthService} from "./services/auth.service";
 import {UserService} from "./services/user.service";
 import {TeacherService} from "./services/teacher.service";
 import {SubjectTeacherService} from "./services/subject-teacher.service";
+import {StudentClassLevelService} from "./services/student-class-level.service";
 
 const academicYearInjectables: Array<any> = [
   {provide: AcademicYearService, useClass: AcademicYearService},
@@ -95,6 +96,10 @@ const studentApplicationInjectables: Array<any> = [
   {provide: StudentApplicationService, useClass: StudentApplicationService},
   {provide: RC_STUDENT_APPLICATION_API_URL, useValue: RC_STUDENT_APPLICATION_API_URL},
 ];
+const studentClassLevelInjectables: Array<any> = [
+  {provide: StudentClassLevelService, useClass: StudentClassLevelService},
+  {provide: RC_STUDENT_CLASS_LEVEL_API_URL, useValue: RC_STUDENT_CLASS_LEVEL_API_URL},
+];
 const subjectInjectables: Array<any> = [
   {provide: SubjectService, useClass: SubjectService},
   {provide: RC_SUBJECT_API_URL, useValue: RC_SUBJECT_API_URL}
@@ -134,6 +139,7 @@ export const injectables = [
   schoolSettingsInjectables,
   studentInjectables,
   studentApplicationInjectables,
+  studentClassLevelInjectables,
   subjectInjectables,
   subjectRegistrationInjectables,
   subjectTeacherInjectables,
