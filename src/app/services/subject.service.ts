@@ -17,6 +17,10 @@ export class SubjectService {
     return this.http.get<Subject[]>(this.subjectApiUrl);
   }
 
+  getAllBySchoolId(schoolId: number): Observable<Subject[]> {
+    return this.http.get<Subject[]>(`${this.subjectApiUrl}/school/${schoolId}`);
+  }
+
   getById(id: number): Observable<Subject> {
     return this.http.get<Subject>(`${this.subjectApiUrl}/${id}`);
   }
