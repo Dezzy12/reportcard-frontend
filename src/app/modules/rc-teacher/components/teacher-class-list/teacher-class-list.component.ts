@@ -52,7 +52,7 @@ export class TeacherClassListComponent implements OnInit {
     this.classLevelSubService.getAll().subscribe((classLevelSubs) => {
       classLevelSubs.forEach(cls => this.classLevelService.getById(cls.classLevelId).subscribe((cl) => {
         this.classes.push({
-          id: cls.id, name: `${cl.name} - ${cls.name}`, sub_id: cls.id, classLevel: cl, classLevelSub: cls
+          id: cls.id, name: `${cl.name} - ${cls.name}`, subId: cls.id, classLevel: cl, classLevelSub: cls
         });
         this.classes.sort((a, b) => a.name < b.name ? -1 : 1);
       }));
