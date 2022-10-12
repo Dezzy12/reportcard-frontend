@@ -56,4 +56,32 @@ export class StudentSubjectsComponent implements OnInit {
     })
   }
 
+  addOrRemoveUncompletedRegisteredSubjectAction(subject: Subject, adding: boolean, sr?: RcSubjectRegistered) {
+    if (this.currentTrial) {
+      if (adding) {
+        this.subjectsRegistered.push({
+          subject: subject,
+          complete: false,
+          registration: {subjectId: subject.id, satId: this.currentTrial.id, id: -1}
+        });
+        this.subjects = this.subjects.filter(s => s.id != subject.id);
+      } else {
+        if (sr && sr.complete) {
+          this.subjectRegistrationService.delete(sr.registration.id).subscribe(() => this.loadStudent())
+        }
+        this.subjectsRegistered = this.subjectsRegistered.filter(sr => sr.subject.id != subject.id)
+        this.subjects.push(subject);
+      }
+    }
+  }
+
+  createStudentApplicationAction() {
+
+  }
+
+  saveRegisteredSubjectsAction() {
+    const subjectsToRegister = this.subjectsRegistered.filter(sr => !sr.complete).map(sr => sr.registration);
+    console.log(subjectsToRegister)
+    this.subjectRegistrationService.saveMultiple(subjectsToRegister).subscribe(() => this.loadStudent());
+  }
 }
