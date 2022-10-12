@@ -2,15 +2,13 @@
   <div class="p-2 lg:p-4 m-2 lg:m-4 text-center">
     <span class="text-2xl">
       You have not completed your application for this academic year.
-      <a href="">Apply now</a>
+      <a (click)="createStudentApplicationAction()">Apply now</a>
     </span>
   </div>
 </div>
 <div *ngIf="currentTrial" class="surface-section">
   <div class="p-2 lg:p-4 m-2 lg:m-4">
-    <div class="flex justify-content-between mb-2">
-      <button pButton label="Register Subject" icon="pi pi-plus"></button>
-    </div>
+    <label class="h4">Registered Subjects</label>
     <div class="mb-2">
       <p-table [value]="subjectsRegistered" responsiveLayout="scroll">
         <ng-template pTemplate="header">
@@ -27,7 +25,43 @@
             <td>{{sr.subject.code}}</td>
             <td>{{sr.subject.coefficient}}</td>
             <td>
-              <button pButton label="Drop" icon="pi pi-times" class="p-button-danger p-button-icon-left"></button>
+              <button pButton label="{{ sr.complete ? 'Drop' : 'Cancel'}}" icon="pi pi-times"
+                      class=" {{ sr.complete ? 'p-button-danger' : 'p-button-secondary'}} p-button-icon-left"
+                      (click)="addOrRemoveUncompletedRegisteredSubjectAction(sr.subject, false, sr)"></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="2">
+              <p-button  label="Save" (click)="saveRegisteredSubjectsAction()"></p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <p-divider></p-divider>
+
+    <label class="h4">Unregistered Subjects</label>
+    <div class="mb-2">
+      <p-table [value]="subjects" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Subject</th>
+            <th>Code</th>
+            <th>Coeff</th>
+            <th>Action</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-s>
+          <tr>
+            <td>{{s.name}}</td>
+            <td>{{s.code}}</td>
+            <td>{{s.coefficient}}</td>
+            <td>
+              <button pButton label="Add" icon="pi pi-plus" class="p-button-icon-left"
+                      (click)="addOrRemoveUncompletedRegisteredSubjectAction(s, true)"></button>
             </td>
           </tr>
         </ng-template>
