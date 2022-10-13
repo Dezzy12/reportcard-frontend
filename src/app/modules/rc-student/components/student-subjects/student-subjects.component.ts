@@ -2,11 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {Student} from "../../../../models/dto/student.model";
 import {UserService} from "../../../../services/user.service";
 import {StudentApplicationService} from "../../../../services/student-application.service";
-import {StudentApplicationTrial} from "../../../../models/dto/student-application.model";
+import {StudentApplication, StudentApplicationTrial} from "../../../../models/dto/student-application.model";
 import {SchoolService} from "../../../../services/school.service";
 import {SubjectRegistrationService} from "../../../../services/subject-registration.service";
 import {RcSubjectRegistered} from "../../../../app.types";
 import {SubjectService} from "../../../../services/subject.service";
+import {Subject} from "../../../../models/dto/subject.model";
+import {SubjectRegistration} from "../../../../models/dto/subject-registration.model";
 
 @Component({
   selector: 'app-student-subjects',
@@ -17,7 +19,9 @@ export class StudentSubjectsComponent implements OnInit {
   student!: Student;
   currentTrial?: StudentApplicationTrial;
   studentApplicationTrials: StudentApplicationTrial[] = [];
+  studentApplications: StudentApplication[] = [];
   subjectsRegistered: RcSubjectRegistered[] = [];
+  subjects: Subject[] = []
 
   constructor(
     private userService: UserService,
@@ -39,9 +43,12 @@ export class StudentSubjectsComponent implements OnInit {
         this.studentApplicationService.getTrialByStudent(this.student.id).subscribe((res) => {
           this.currentTrial = res.find(sat => sat.academicYearId == school.currentYearId);
           if (this.currentTrial) {
-            this.loadSubjects(this.currentTrial.id);
+            this.loadRegisteredSubjects(this.currentTrial.id);
           }
         });
+      });
+      this.studentApplicationService.getAllByStudent(this.student.id).subscribe((res) => {
+        this.studentApplications = res
       });
     });
   }
