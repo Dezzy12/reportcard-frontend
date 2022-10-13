@@ -46,13 +46,25 @@ export class StudentSubjectsComponent implements OnInit {
     });
   }
 
-  loadSubjects = (satId: number) => {
+  loadUnregisteredSubjects = (subjectRegistrations: SubjectRegistration[]) => {
+    this.subjectService.getAllBySchoolId(this.student.schoolId).subscribe(res => {
+      this.subjects = [];
+      res.forEach(subject => {
+        if (!subjectRegistrations.map(sr => sr.subjectId).find(id => id == subject.id)) {
+          this.subjects.push(subject);
+        }
+      })
+    });
+  }
+
+  loadRegisteredSubjects = (satId: number) => {
     this.subjectRegistrationService.getBySatId(satId).subscribe((res) => {
       this.subjectsRegistered = [];
       res.forEach(sr => this.subjectService.getById(sr.subjectId).subscribe(subject => {
-        this.subjectsRegistered.push({registration: sr, subject: subject});
+        this.subjectsRegistered.push({registration: sr, subject: subject, complete: true});
       }));
-      console.log(this.subjectsRegistered)
+
+      this.loadUnregisteredSubjects(res)
     })
   }
 
