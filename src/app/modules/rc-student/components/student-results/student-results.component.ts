@@ -52,7 +52,7 @@ export class StudentResultsComponent implements OnInit {
         this.studentApplicationTrials.push(...sa.studentApplicationTrials);
         this.studentClassLevels.push({
           classLevel: sa.classLevel, id: sa.classLevel.id,
-          classLevelSub: sa.classLevelSub, sub_id: sa.classLevelSub.id,
+          classLevelSub: sa.classLevelSub, subId: sa.classLevelSub.id,
           name: `${sa.classLevel.name} ${sa.classLevelSub.name}`
         });
         this.rcRequest.classLevelSubId = sa.classLevelSub.id;
