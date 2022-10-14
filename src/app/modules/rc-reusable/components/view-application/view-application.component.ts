@@ -76,7 +76,11 @@ export class ViewApplicationComponent implements OnInit {
     this._subjectRegistrationService.getBySatId(satId).subscribe((subjectRegs) => {
       subjectRegs.forEach(subjectReg => {
         this.subjectService.getById(subjectReg.subjectId).subscribe((subject) => {
-          this.registeredSubjects.push({registration: subjectReg, subject: subject});
+          this.registeredSubjects.push({
+            registration: subjectReg,
+            subject: subject,
+            complete: true
+          });
         });
       });
     });
