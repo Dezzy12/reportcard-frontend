@@ -6,5 +6,16 @@
     <p-divider></p-divider>
     <app-user-details *ngIf="student && student.account" [user]="student.user" (onUserSaved)="loadUserComplete()"></app-user-details>
     <app-change-password *ngIf="student && student.account" [username]="student.user.email"></app-change-password>
+
+    <p-dialog header="Select Class Level" styleClass="w-30rem h-30rem" [(visible)]="showApplyDialog" [closeOnEscape]="false">
+      <form [formGroup]="selectClassLevelForm" (submit)="createStudentApplicationAction()">
+        <div class="field">
+          <label class="block">Name</label>
+          <p-dropdown placeholder="Select Class Level" styleClass="w-full" [formControlName]="'classLevel'"
+                      [options]="studentClassLevels" [optionLabel]="'name'" [optionValue]="'subId'"></p-dropdown>
+        </div>
+        <button pButton label="Confirm" [disabled]="!selectClassLevelForm.valid"></button>
+      </form>
+    </p-dialog>
   </div>
 </div>
