@@ -2,13 +2,19 @@
   <form class="form p-3" [formGroup]="studentForm">
     <span class="text-3xl">{{student ? student.user.firstName : 'Editing'}}</span>
     <div class="p-fluid grid py-5">
-      <div class="field col-8">
+      <div class="field col-12 md:col-6">
         <span class="p-float-label">
-          <input pInputText id="name" [formControlName]="'name'">
-          <label for="name">Name</label>
+          <input pInputText id="firstname" [formControlName]="'firstname'">
+          <label for="firstname">First Name</label>
         </span>
       </div>
-      <div class="field col-4 flex align-content-center">
+      <div class="field col-12 md:col-6">
+        <span class="p-float-label">
+          <input pInputText id="lastname" [formControlName]="'lastname'">
+          <label for="lastname">Last Name</label>
+        </span>
+      </div>
+      <div class="field col-12 flex align-content-center">
         <span class="mr-2 flex align-self-center p-radiobutton-box" *ngFor="let gender of genders">
           <input id="gender" class="p-radiobutton" type="radio"
                  [checked]="student? student.gender.toLowerCase() == gender.toLowerCase(): false" [value]="gender"
