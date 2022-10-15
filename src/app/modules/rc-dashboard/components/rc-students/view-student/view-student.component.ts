@@ -7,11 +7,11 @@ import {Gender} from "../../../../../models/enum/gender.enum";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-  selector: 'app-student',
-  templateUrl: './student.component.html',
-  styleUrls: ['./student.component.scss']
+  selector: 'app-view-student',
+  templateUrl: './view-student.component.html',
+  styleUrls: ['./view-student.component.scss']
 })
-export class StudentComponent implements OnInit {
+export class ViewStudentComponent implements OnInit {
   student!: Student;
   genders: Gender[] = [Gender.FEMALE, Gender.MALE, Gender.OTHER];
   studentForm: FormGroup = new FormGroup({});
@@ -20,8 +20,7 @@ export class StudentComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private studentService: StudentService,
-    private msgService: MessageService
+    private studentService: StudentService
   ) {
     const studentId = this.activatedRoute.snapshot.params['id'];
     if (studentId) {
@@ -37,7 +36,8 @@ export class StudentComponent implements OnInit {
 
   ngOnInit(): void {
     this.studentForm = this.fb.group({
-      name: ['', Validators.required],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
       gender: ['', Validators.required],
       dob: ['', Validators.required],
       pob: ['', Validators.required],
@@ -49,7 +49,7 @@ export class StudentComponent implements OnInit {
       firstname: [this.student.user.firstName, Validators.required],
       lastname: [this.student.user.lastName, Validators.required],
       gender: [this.student.gender, Validators.required],
-      dob: [this.student.dob, Validators.required],
+      dob: [new Date(this.student.dob), Validators.required],
       pob: [this.student.pob, Validators.required],
     });
   }
