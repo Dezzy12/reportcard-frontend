@@ -11,7 +11,7 @@ import {RcSettingsComponent} from './components/rc-settings/rc-settings.componen
 import {RcBodyIntroComponent} from './components/rc-body-intro/rc-body-intro.component';
 import {RcApplicationsComponent} from './components/rc-applications/rc-applications.component';
 import {SubjectComponent} from "./components/rc-subjects/subject/subject.component";
-import {StudentComponent} from "./components/rc-students/student/student.component";
+import {ViewStudentComponent} from "./components/rc-students/view-student/view-student.component";
 import {ViewClassLevelComponent} from "./components/rc-classes/view-class-level/view-class-level.component";
 import {SectionComponent} from "./components/rc-settings/section/section.component";
 import {AddStudentComponent} from './components/rc-students/add-student/add-student.component';
@@ -40,7 +40,7 @@ import {RcSelectSchoolComponent} from "./components/rc-select-school/rc-select-s
     RcBodyIntroComponent,
     RcApplicationsComponent,
     SubjectComponent,
-    StudentComponent,
+    ViewStudentComponent,
     ViewClassLevelComponent,
     SectionComponent,
     AddStudentComponent,
