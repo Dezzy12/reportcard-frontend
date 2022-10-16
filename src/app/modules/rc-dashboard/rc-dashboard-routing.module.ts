@@ -12,7 +12,7 @@ import {RcClassListsComponent} from "./components/rc-class-lists/rc-class-lists.
 import {RcSettingsComponent} from "./components/rc-settings/rc-settings.component";
 import {RcHomeComponent} from "./components/rc-home/rc-home.component";
 import {AddStudentComponent} from "./components/rc-students/add-student/add-student.component";
-import {StudentComponent} from "./components/rc-students/student/student.component";
+import {ViewStudentComponent} from "./components/rc-students/view-student/view-student.component";
 import {AddClassLevelComponent} from "./components/rc-classes/add-class-level/add-class-level.component";
 import {SubjectComponent} from "./components/rc-subjects/subject/subject.component";
 import {AddSubjectComponent} from "./components/rc-subjects/add-subject/add-subject.component";
@@ -34,7 +34,7 @@ const routes: Routes = [
       {component: ViewClassLevelComponent, path: 'class/view/:id'},
       {component: RcStudentsComponent, path: 'student'},
       {component: AddStudentComponent, path: 'student/add'},
-      {component: StudentComponent, path: 'student/view/:id'},
+      {component: ViewStudentComponent, path: 'student/view/:id'},
       {component: RcApplicationsComponent, path: 'application'},
       {component: AddApplicationComponent, path: 'application/add'},
       {component: RcViewApplicationComponent, path: 'application/view/:id'},
