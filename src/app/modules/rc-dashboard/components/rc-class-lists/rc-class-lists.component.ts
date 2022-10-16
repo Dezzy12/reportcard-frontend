@@ -47,7 +47,7 @@ export class RcClassListsComponent implements OnInit {
         sections.forEach((section) => this._classLevelService.getBySection(section.id).subscribe((classLevels) => {
           classLevels.forEach((cl) => this._classLevelSubService.getAllByClassLevelId(cl.id).subscribe((classLevelSubs) => {
             classLevelSubs.forEach((cls) => this.classes.push({
-              id: cl.id, sub_id: cls.id, classLevel: cl, classLevelSub: cls, name: `${cl.name} ${cls.name}`
+              id: cl.id, subId: cls.id, classLevel: cl, classLevelSub: cls, name: `${cl.name} ${cls.name}`
             }));
             this.classes.sort((a, b) => a.name < b.name ? -1 : 1);
           }));
