@@ -63,10 +63,10 @@ export class RcApplicationsComponent implements OnInit {
         classes.forEach(c => this.classSubService.getAllByClassLevelId(c.id).subscribe((classSubs) => {
           classSubs.forEach((cs) => {
             this.classes.push({
-              id: c.id, sub_id: cs.id, name: `${c.name} ${cs.name}`, classLevel: c, classLevelSub: cs
+              id: c.id, subId: cs.id, name: `${c.name} ${cs.name}`, classLevel: c, classLevelSub: cs
             });
           });
-          if (this.classes.length > 0) this.applicationsRequest.classSubId = this.classes[0].sub_id
+          if (this.classes.length > 0) this.applicationsRequest.classSubId = this.classes[0].subId
         }));
       });
     }
