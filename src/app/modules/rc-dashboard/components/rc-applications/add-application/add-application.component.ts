@@ -71,7 +71,7 @@ export class AddApplicationComponent implements OnInit {
               classLevelSubs.forEach((cls) => {
                 this.classLevels.push({
                   id: cl.id,
-                  sub_id: cls.id,
+                  subId: cls.id,
                   name: `${cl.name} ${cls.name}`,
                   classLevel: cl,
                   classLevelSub: cls
