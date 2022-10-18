@@ -7,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
     <div>
       <p-toast></p-toast>
       <div class="flex justify-content-center">
-        <div class="surface-card p-4 shadow-2 border-round w-full m-2 lg:m-8">
+        <div class="surface-card p-4 shadow-2 border-round w-full m-4 lg:m-8">
           <router-outlet></router-outlet>
         </div>
       </div>
