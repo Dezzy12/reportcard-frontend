@@ -9,7 +9,7 @@
     <span class="text-3xl">Student Information</span>
     <div class="p-fluid grid">
       <div class="field col-12 md:col-6">
-        <label for="username" class="block text-900 font-medium mb-2">Username</label>
+        <label for="username" class="block text-900 font-medium mb-2">Email</label>
         <input id="username" type="text" pInputText class="w-full mb-3" [formControlName]="'email'">
       </div>
       <div class="field col-12 md:col-6">
@@ -41,7 +41,7 @@
       </div>
       <div class="field col-12 md:col-6">
         <label for="dob" class="block text-900 font-medium mb-2">Date of Birth</label>
-        <p-calendar id="dob" [formControlName]="'dob'"></p-calendar>
+        <p-calendar id="dob" [maxDate]="maximumDate" [formControlName]="'dob'"></p-calendar>
       </div>
       <div class="field col-12 md:col-6">
         <label for="pob" class="block text-900 font-medium mb-2">Place of Birth</label>
