@@ -19,6 +19,7 @@ export class RegisterStudentComponent implements OnInit {
   studentForm: FormGroup;
   genders: string[] = Object.keys(Gender);
   schools: School[] = [];
+  maximumDate: Date;
 
   constructor(
     private fb: FormBuilder,
@@ -26,13 +27,15 @@ export class RegisterStudentComponent implements OnInit {
     private schoolService: SchoolService,
     private authService: AuthService,
   ) {
+    this.maximumDate = new Date(Date.UTC(new Date().getUTCFullYear() - 1, 0));
+    const suggestedDate: Date = new Date(Date.UTC(new Date().getUTCFullYear() - 12, 0, 1));
     this.studentForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       gender: ['', Validators.required],
-      dob: ['', Validators.required],
+      dob: [suggestedDate, Validators.required],
       pob: ['', Validators.required],
       school: [0, Validators.required],
       fatherName: [''],
