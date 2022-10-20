@@ -54,6 +54,7 @@ export class AdminViewTeacherComponent implements OnInit {
       this._subjectService.getById(st.key.subjectId).subscribe(subject => this.assignedSubjects.push(subject));
     }));
   }
+
   loadUnassignedSubjects() {
     this.showSubjectDialog = true
     this.unassignedSubjects = this.subjects.filter(s => !this.assignedSubjects.find((aS) => aS.id == s.id));

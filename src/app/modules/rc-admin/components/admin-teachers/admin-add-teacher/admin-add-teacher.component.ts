@@ -1,10 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {AuthService} from "../../../../../services/auth.service";
-import {User} from "../../../../../models/dto/user.model";
-import {Role} from "../../../../../models/enum/role.enum";
-import {Teacher} from "../../../../../models/dto/teacher.model";
 import {SchoolService} from "../../../../../services/school.service";
 import {School} from "../../../../../models/dto/school.model";
 

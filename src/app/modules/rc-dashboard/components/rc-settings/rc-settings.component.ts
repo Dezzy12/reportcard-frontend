@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MessageService} from "primeng/api";
 import {Sequence} from "../../../../models/dto/sequence.model";
 import {SequenceService} from "../../../../services/sequence.service";
@@ -53,7 +53,7 @@ export class RcSettingsComponent implements OnInit {
     });
     this.settingsForm = this.fb.group({
       applicationsOpen: [this.school ? this.school.applicationOpen : false, Validators.required],
-      name: [this.school? this.school.name : '', Validators.required],
+      name: [this.school ? this.school.name : '', Validators.required],
       year: [this.school ? (this.school.currentYearId ? this.school.currentYearId : -1) : -1, Validators.required],
       term: [this.school ? (this.school.currentTerm ? this.school.currentTerm : 'None') : 'None'],
       sequence: [this.school ? (this.school.currentSequenceId ? this.school.currentSequenceId : -1) : -1, Validators.required],

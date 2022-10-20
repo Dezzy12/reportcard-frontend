@@ -17,11 +17,11 @@ import {StudentClassLevel} from "../../../../app.types";
   styleUrls: ['./rc-class-lists.component.scss']
 })
 export class RcClassListsComponent implements OnInit {
-  private readonly schoolId = LocalStorageUtil.readSchoolId();
   classes: StudentClassLevel[] = [];
   academicYears: AcademicYear[] = [];
   subjects: Subject[] = [];
   sequences: Sequence[] = [];
+  private readonly schoolId = LocalStorageUtil.readSchoolId();
 
   constructor(
     private _sectionService: SectionService,

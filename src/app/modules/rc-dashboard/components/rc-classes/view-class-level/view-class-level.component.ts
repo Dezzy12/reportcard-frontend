@@ -3,7 +3,6 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angul
 import {ClassLevel} from "../../../../../models/dto/class-level.model";
 import {ClassLevelSubService} from "../../../../../services/class-level-sub.service";
 import {ClassLevelSub} from "../../../../../models/dto/class-level-sub.model";
-import {MessageService} from "primeng/api";
 import {ClassLevelService} from "../../../../../services/class-level.service";
 import {SectionService} from "../../../../../services/section.service";
 import {Section} from "../../../../../models/dto/section.model";
@@ -40,6 +39,10 @@ export class ViewClassLevelComponent implements OnInit {
       classLevels: this.fb.array([])
     });
     this.msFormControl = new FormControl(0, Validators.required);
+  }
+
+  get classLevelSubForms(): FormArray {
+    return this.classForm.get('classLevels') as FormArray;
   }
 
   ngOnInit(): void {
@@ -82,10 +85,6 @@ export class ViewClassLevelComponent implements OnInit {
 
   addToNonMandatorySubjects(subject: Subject) {
     if (!this.mandatorySubjects.find(s => s.subject.id == subject.id)) this.nonMandatorySubjects.push(subject);
-  }
-
-  get classLevelSubForms(): FormArray {
-    return this.classForm.get('classLevels') as FormArray;
   }
 
   setClassLevelSubForm(id: number, name: string) {

@@ -5,7 +5,7 @@ import {StudentService} from "../../../../services/student.service";
 import {StudentApplicationService} from "../../../../services/student-application.service";
 import {ApplicationRequest, StudentApplicationTrial} from "../../../../models/dto/student-application.model";
 import {Student} from "../../../../models/dto/student.model";
-import {RcClassLevel, StudentClassLevel} from "../../../../app.types";
+import {StudentClassLevel} from "../../../../app.types";
 import {StudentClassLevelService} from "../../../../services/student-class-level.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
@@ -19,7 +19,7 @@ export class StudentHomeComponent implements OnInit {
   sat?: StudentApplicationTrial;
   studentClassLevels: StudentClassLevel[] = [];
   showApplyDialog: boolean = false;
-  selectClassLevelForm: FormGroup ;
+  selectClassLevelForm: FormGroup;
 
   constructor(
     private _fb: FormBuilder,

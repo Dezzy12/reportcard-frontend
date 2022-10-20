@@ -12,7 +12,7 @@ import {
 } from './components/student-applications/student-view-application/student-view-application.component';
 import {StudentResultsComponent} from './components/student-results/student-results.component';
 import {StudentSubjectsComponent} from './components/student-subjects/student-subjects.component';
-import { StudentApplyComponent } from './components/student-apply/student-apply.component';
+import {StudentApplyComponent} from './components/student-apply/student-apply.component';
 
 
 @NgModule({

@@ -2,11 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Section} from "../../../../../models/dto/section.model";
 import {SectionService} from "../../../../../services/section.service";
-import {LocalStorageUtil} from "../../../../../utils/local-storage.util";
 import {Subject} from "../../../../../models/dto/subject.model";
 import {SubjectService} from "../../../../../services/subject.service";
 import {Router} from "@angular/router";
-import {Observable} from "rxjs";
 import {SchoolService} from "../../../../../services/school.service";
 
 @Component({
@@ -47,7 +45,7 @@ export class AddSubjectComponent implements OnInit {
       id: -1, name: this.subjectForm.get('name')?.value, code: this.subjectForm.get('code')?.value,
       coefficient: this.subjectForm.get('coeff')?.value, sectionId: this.subjectForm.get('section')?.value
     }
-    this.subjectService.save(subject).subscribe((res) => {
+    this.subjectService.save(subject).subscribe(() => {
       this.router.navigate([`/dashboard/subject`]).then();
     });
   }
