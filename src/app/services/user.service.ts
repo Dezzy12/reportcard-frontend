@@ -24,6 +24,14 @@ export class UserService {
     return this.http.get<User[]>(`${this.apiUrl}/admin`);
   }
 
+  getAllTeacher(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/teacher`);
+  }
+
+  getAllStudent(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/student`);
+  }
+
   getComplete(id: number): Observable<UserComplete> {
     return this.http.get<UserComplete>(`${this.apiUrl}/complete/${id}`);
   }
