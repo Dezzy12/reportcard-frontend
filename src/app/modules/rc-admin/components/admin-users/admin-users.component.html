@@ -1,5 +1,16 @@
 <div class="surface-section px-2 py-5">
-  <div class="shadow-2 border-round">
+  <div class="shadow-2 border-round  p-2 lg:p-4">
+    <p-toolbar styleClass="mb-4">
+      <ng-template pTemplate="left">
+        <p-dropdown
+          placeholder="Select By role" (onChange)="onSelectedRoleAction()" [options]="roles"
+          [optionValue]="'id'" [optionLabel]="'name'" [(ngModel)]="selectedRoleId"></p-dropdown>
+      </ng-template>
+      <ng-template pTemplate="right">
+        <p-button [routerLink]="['/admin/admins/add']" label="Add User"></p-button>
+      </ng-template>
+    </p-toolbar>
+    <p-divider></p-divider>
     <p-table [value]="users" responsiveLayout="scroll" styleClass="p-datatable-striped">
       <ng-template pTemplate="header">
         <tr>
