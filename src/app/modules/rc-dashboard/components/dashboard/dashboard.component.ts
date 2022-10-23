@@ -26,8 +26,8 @@ import {Observable} from "rxjs";
 
       <p-dialog [visible]="showSchoolsDialog" [modal]="true" [header]="'Select School'">
         <ng-template pTemplate="content">
-          <rc-app-select-school [schools]="schools"
-                                (onSchoolSelect)="onSchoolSelectAction($event)"></rc-app-select-school>
+          <rc-app-select-school
+            [schools]="schools" (onSchoolSelect)="onSchoolSelectAction($event)"></rc-app-select-school>
         </ng-template>
       </p-dialog>
     </main>

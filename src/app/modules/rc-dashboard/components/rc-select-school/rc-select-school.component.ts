@@ -18,7 +18,10 @@ export class RcSelectSchoolComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     const sid = LocalStorageUtil.readSchoolId();
-    if (sid) this.schoolId = sid;
+    if (sid) {
+      this.schoolId = sid;
+      this.onSchoolSelect.emit(false);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
