@@ -30,7 +30,7 @@
           <td>{{u.address}}</td>
           <td>
             <p-inputSwitch [(ngModel)]="u.approved" (ngModelChange)="toggleApprovedAction(u.id)"
-                           [disabled]="u.role.toString().toLowerCase() == 'admin'"></p-inputSwitch>
+                           [disabled]="u.role.toString().toLowerCase() == 'super admin'"></p-inputSwitch>
           </td>
           <td>{{u.role.toString() | titlecase}}</td>
         </tr>
