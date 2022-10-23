@@ -9,7 +9,7 @@ import {MenuItem} from "primeng/api";
       <p-toast></p-toast>
       <app-top-menu [menuItems]="adminMenuItems"></app-top-menu>
     </header>
-    <main class="z-0 h-full min-h-screen my-2 py-8">
+    <main class="z-0 h-full min-h-screen m-2 py-8">
       <router-outlet></router-outlet>
     </main>
     <footer class="z-1">
