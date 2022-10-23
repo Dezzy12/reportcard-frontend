@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  serverUrl: "https://ireportcard.azurewebsites.net",
+  serverUrl: "https://ireportcard.herokuapp.com/",
 };
