@@ -6,6 +6,9 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {LocalStorageUtil} from "../../../../utils/local-storage.util";
 import {Router} from "@angular/router";
 import {ReportCardService} from "../../../../services/report-card.service";
+import {School} from "../../../../models/dto/school.model";
+import {SchoolService} from "../../../../services/school.service";
+import {UserService} from "../../../../services/user.service";
 
 @Component({
   selector: 'app-top-menu',
@@ -18,15 +21,17 @@ import {ReportCardService} from "../../../../services/report-card.service";
         </ng-template>
         <ng-template pTemplate="end">
           <div class="flex justify-content-center align-items-center">
+            <a [hidden]="hideAdminLink" [routerLink]="'/admin'" pButton label="Admin" class="m-1"></a>
             <span
-              class="p-button p-button-icon text-white border-circle {{online ? 'bg-green-300 hover:bg-green-300': 'bg-red-300 hover:bg-red-600' }}"
+              class="{{online ? 'text-green-400 hover:text-green-600': 'text-red-400 hover:text-red-600' }}"
               pTooltip="{{online ? 'Online' : 'Offline'}}" tooltipPosition="top">
-              <i class="{{online? 'pi pi-bolt': 'pi pi-ban'}}"></i>
+              {{online ? 'Online' : 'Offline'}}
             </span>
-            <button (click)="changeSchoolAction()" pButton pTooltip="Change School" tooltipPosition="top"
-                    icon="pi pi-arrows-h" class="p-button-sm p-button-raised border-noround m-1"></button>
             <button (click)="logoutAction()" pButton pTooltip="Logout" tooltipPosition="top" icon="pi pi-power-off"
                     data-in-line="true" class="p-button-sm p-button-danger border-noround m-1"></button>
+            <p-dropdown
+              [options]="schoolsByAdmin" [optionValue]="'id'" [optionLabel]="'name'"
+              [(ngModel)]="selectedSchoolId" (onChange)="changeSchoolAction()"></p-dropdown>
           </div>
         </ng-template>
       </p-menubar>
@@ -36,37 +41,51 @@ import {ReportCardService} from "../../../../services/report-card.service";
 export class TopMenuComponent implements OnInit {
 
   online: boolean = false;
+  hideAdminLink: boolean = true;
   @Input() menuItems: MenuItem[] = [];
+  schoolsByAdmin: School[] = [];
+  selectedSchoolId: number = LocalStorageUtil.readSchoolId() ?? -1;
 
 
-  constructor(private router: Router, private authService: AuthService, private defaultService: ReportCardService, private msgService: MessageService) {
+  constructor(
+    private _router: Router,
+    private _authService: AuthService,
+    private _defaultService: ReportCardService,
+    private _msgService: MessageService,
+    private _userService: UserService,
+    private _schoolService: SchoolService) {
   }
 
   ngOnInit(): void {
     this.checkOnlineStatus();
+    this.loadSchoolsByAdmin();
   }
 
+  loadSchoolsByAdmin = () => this._userService.getCompleteFromSession().subscribe(u => {
+    if (!u.account) this.hideAdminLink = false;
+    this._schoolService.getAllByOwner(u.user.id).subscribe(schools => this.schoolsByAdmin = schools);
+  })
+
   checkOnlineStatus(): void {
-    this.defaultService.test().subscribe({
+    this._defaultService.test().subscribe({
       next: () => this.online = true,
       error: () => this.online = false
     });
   }
 
   logoutAction() {
-    console.log("logging out")
     const confirmDelete = confirm("Are you sure you want to log out?");
     const sessionId: string | null = LocalStorageUtil.readUserToken();
     if (sessionId && confirmDelete) {
-      this.authService.logout({sessionId: sessionId}).subscribe({
+      this._authService.logout({sessionId: sessionId}).subscribe({
         next: (res) => {
-          this.router.navigate(['/auth/login']).then(() => {
-            addToMessageService(this.msgService, 'success', 'Log out', res.message);
+          this._router.navigate(['/auth/login']).then(() => {
+            addToMessageService(this._msgService, 'success', 'Log out', res.message);
           });
           LocalStorageUtil.deleteUserToken();
           LocalStorageUtil.deleteSchoolId();
         }, error: (e: HttpErrorResponse) => {
-          addToMessageService(this.msgService, 'warn', 'Log out', e.error.message)
+          addToMessageService(this._msgService, 'warn', 'Log out', e.error.message)
         }
       });
     }
@@ -74,7 +93,9 @@ export class TopMenuComponent implements OnInit {
   }
 
   changeSchoolAction() {
-    LocalStorageUtil.deleteSchoolId();
-    location.reload();
+    if (this.selectedSchoolId > 0) {
+      LocalStorageUtil.writeSchoolId(this.selectedSchoolId);
+      location.reload();
+    }
   }
 }
