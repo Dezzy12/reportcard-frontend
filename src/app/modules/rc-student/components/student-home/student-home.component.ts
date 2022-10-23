@@ -67,7 +67,7 @@ export class StudentHomeComponent implements OnInit {
         classSubId: classSubId,
         yearId: -1 // setting this so the current academic year is used instead
       }
-      this._studentApplicationService.save(applicationRequest).subscribe();
+      this._studentApplicationService.save(applicationRequest).subscribe(() => this.loadUserComplete());
     }
   }
 }
